@@ -27,11 +27,17 @@ github_username:  jekyll
 # Build settings
 markdown: kramdown
 #theme: minima
-remote_theme: fongadrew/hydeout
+remote_theme: fongandrew/hydeout
 plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-remote-theme
+  - github-pages
+
+paginate: 5
+paginate_path: 'blog/page:num'
+sidebar_blog_link: '/blog'
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
