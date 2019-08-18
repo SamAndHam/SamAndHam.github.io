@@ -19,8 +19,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   A short blog about the things that I am learning.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-linkedin: samuel-wang-182a23175
-github_username:  samandham
+linkedin: "samuel-wang-182a23175"
+github_username:  "samandham"
 
 # Build settings
 markdown: kramdown
@@ -35,7 +35,7 @@ plugins:
 paginate: 5
 paginate_path: 'blog/page:num'
 sidebar_blog_link: '/blog'
-
+sidebar_home_link: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
