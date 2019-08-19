@@ -25,7 +25,7 @@ github_username:  "samandham"
 # Build settings
 markdown: kramdown
 #theme: minima
-remote_theme: fongandrew/hydeout
+remote_theme: sylhare/Type-on-Strap
 plugins:
   - jekyll-feed
   - jekyll-paginate
