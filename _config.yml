@@ -35,13 +35,14 @@ plugins:
 paginate: 7
 paginate_path: 'page/page:num'
 
+#build settings
 permalink: /:categories/:title.html
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: :compressed
 
-categories:
-    linux:
-        output: true
-    language:
-        output: true
+
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
