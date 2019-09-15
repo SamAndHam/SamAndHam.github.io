@@ -10,10 +10,10 @@ This will be first in the series of articles to come that will be written in att
 * Background reading
 	- Heap and Stack
 	- limits of a process ( prlimit, getrlimit, setrlimit)
+		- mmap and its threshold
 	- Memory residency 
 		- Resident Set Size (RSS)
 		- VmSize
-	- mmap and its threshold
 * Reserving memory in Linux
 	- /dev/mem
 	- Device tree nodes
