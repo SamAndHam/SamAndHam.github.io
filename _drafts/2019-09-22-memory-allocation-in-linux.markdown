@@ -8,33 +8,24 @@ categories: Linux
 This post tries to explore how malloc works internally in Linux
 
 
-* Malloc
-  - heap
-  - threshold
+* [Malloc](#Malloc)
+  - [Heap](#Heap)
+  - [Threshold](#Threshold)
     - brk()/mmap()
-  - Resident or not
+  - [Resident or not](#Resident or not)
     - Ensuring residency 
 
-## malloc
+## Malloc
 
 Malloc is a  [ library call ](https://www.humblec.com/who-told-malloc-is-a-system-call/) which implements functions internally to allocate memory through system calls; itself
 not a system call. 
-Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/malloc.html) leaves 
+Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/malloc.html) leaves its implementation 
 
 
 
 
-### heap
-It calls to sbrk() when value for the size of memory to allocate is within the MMAP_THRESHOLD.
-//check process liits
-(user prlmit api ) //refer to api interface hands-on linux hard and soft 
-cat /proc/$$/status
+### Heap
 
-
-
-dynamic memory allocaition/ beyndthebasics/Limits and privilldges 
-
-### memory residency
 
 > cat /proc/${process_id}/status
 
@@ -49,52 +40,54 @@ dynamic memory allocaition/ beyndthebasics/Limits and privilldges
 >VmRSS:      4132 kB\
 > ...
 
-The size of the virtual memory allocated to the process bash at the time of issuing the command was 16152 kb
-but only 4132 kB of the total VmSize was resident in 
+It calls to sbrk() when value for the size of memory to allocate is within the MMAP_THRESHOLD.
 
-
-
-Memory are then mappedd in pages to the virtual memory of each process.
-
-
-to check if memory resisdent or not . mincore()
-
+malloc_stats
+//check process liits
+(user prlmit api ) //refer to api interface hands-on linux hard and soft 
+cat /proc/$$/status
 
 
 Each process has its own heap
 
-Gettiing statistics 
-http://man7.org/linux/man-pages/man3/malloc_stats.3.html
-malloc_stats
 getpid()
 https://github.com/TysonRayJones/CTools/blob/master/memory/memorymeasure.c
 $$/ getpid()
 sprintf(cmd , /proc/%d/status, getpid());
 
-https://github.com/TysonRayJones/CTools/blob/master/memory/memorymeasure.c
 
 
-### brk()/sbrk()
+dynamic memory allocaition/ beyndthebasics/Limits and privilldges 
 
-### mmap()
+The size of the virtual memory allocated to the process bash at the time of issuing the command was 16152 kb
+but only 4132 kB of the total VmSize was resident in memory
 
-## locking memory
+
+
+Memory are then mappedd in pages to the virtual memory of each process.
+
+### Threshold
+
+
+It calls to sbrk() when value for the size of memory to allocate is within the MMAP_THRESHOLD.
+
+Gettiing statistics 
+http://man7.org/linux/man-pages/man3/malloc_stats.3.html
+malloc_stats
+
+
+#### brk()/mmap()
+
+brk() expands in arena ( within heap)
+mmap() anywhere whitn virtual address space
+
+
+### Resident or not
+
+to check if memory resisdent or not . mincore()
+
+#### Ensuring residency 
 int mlock(const void *addr, size_t len);
 int mlockall(int flags);
 
 
-* Background reading
-	- Heap and Stack
-	- limits of a process ( prlimit, getrlimit, setrlimit)
-		- mmap and its threshold
-	- Memory residency 
-		- Resident Set Size (RSS)
-		- VmSize
-* Reserving memory in Linux
-	- /dev/mem
-	- Device tree nodes
-	- Kernel driver
-* Comparing the performance between dynamic allocation vs reserved memory
-	- With small amount of memory via malloc
-	- With big amount of memory via  malloc
-	- Multithreaded situations
