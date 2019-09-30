@@ -28,15 +28,15 @@ dynamic memory allocaition/ beyndthebasics/Limits and privilldges
 
 > cat /proc/${process_id}/status
 
->Name:   bash
->Umask:  0022
-> ...
->VmPeak:    16204 kB
->VmSize:    16152 kB
->VmLck:         0 kB
->VmPin:         0 kB
->VmHWM:      4132 kB
->VmRSS:      4132 kB
+>Name:   bash\
+>Umask:  0022\
+> ...\
+>VmPeak:    16204 kB\
+>VmSize:    16152 kB\
+>VmLck:         0 kB\
+>VmPin:         0 kB\
+>VmHWM:      4132 kB\
+>VmRSS:      4132 kB\
 > ...
 
 The size of the virtual memory allocated to the process bash at the time of issuing the command was 16152 kb
