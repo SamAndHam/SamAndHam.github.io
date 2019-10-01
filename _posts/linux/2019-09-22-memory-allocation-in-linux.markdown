@@ -7,25 +7,29 @@ categories: Linux
 
 This post tries to explore how malloc works internally in Linux
 
+*IN PROGRESS *
 
 * [Malloc](#Malloc)
   - [Heap](#Heap)
   - [Threshold](#Threshold)
     - brk()/mmap()
-  - [Resident or not](#Resident or not)
+  - [Resident-or-not](#Resident-or-not)
     - Ensuring residency 
 
 ## Malloc
 
 Malloc is a  [ library call ](https://www.humblec.com/who-told-malloc-is-a-system-call/) which implements functions internally to allocate memory through system calls; itself
 not a system call. 
-Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/malloc.html) leaves its implementation 
-
+Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/malloc.html) leaves its implementation to the runtime library.
 
 
 
 ### Heap
 
+
+*Getting statistics of process *
+
+In other to better understand the internals of a process, ways of inspecting the memory details would first be needed.
 
 > cat /proc/${process_id}/status
 
@@ -40,20 +44,24 @@ Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/mallo
 >VmRSS:      4132 kB\
 > ...
 
-It calls to sbrk() when value for the size of memory to allocate is within the MMAP_THRESHOLD.
+Getting the statistics of a process using bash via /proc . 
 
-malloc_stats
-//check process liits
-(user prlmit api ) //refer to api interface hands-on linux hard and soft 
-cat /proc/$$/status
+{{ "{% highlight c " }}%}
+	FILE* file = NULL;
+	file = fopen("/proc/self/status", "r");
+	
+	if (file == NULL) {
+		printf("Call to getMemory FAILED; "
+			   "/proc/self/status not found!\n");
+		return 1;
+	}
+{{ "{% endhighlight " }}%}
+
+Getting the statistics of the calling process by opening  /proc/self/status as a file. 
+
 
 
 Each process has its own heap
-
-getpid()
-https://github.com/TysonRayJones/CTools/blob/master/memory/memorymeasure.c
-$$/ getpid()
-sprintf(cmd , /proc/%d/status, getpid());
 
 
 
@@ -75,6 +83,13 @@ Gettiing statistics
 http://man7.org/linux/man-pages/man3/malloc_stats.3.html
 malloc_stats
 
+It calls to sbrk() when value for the size of memory to allocate is within the MMAP_THRESHOLD.
+
+malloc_stats
+//check process liits
+(user prlmit api ) //refer to api interface hands-on linux hard and soft 
+cat /proc/$$/status
+
 
 #### brk()/mmap()
 
@@ -82,7 +97,7 @@ brk() expands in arena ( within heap)
 mmap() anywhere whitn virtual address space
 
 
-### Resident or not
+### Resident-or-not
 
 to check if memory resisdent or not . mincore()
 
