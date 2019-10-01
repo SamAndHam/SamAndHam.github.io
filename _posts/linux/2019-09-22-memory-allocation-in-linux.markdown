@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Memory allocation in Linux"
-date:   2019-09-12 21:37:52 +0800
+date:   2019-09-22 21:37:52 +0800
 categories: Linux
 ---
 
@@ -33,20 +33,21 @@ In other to better understand the internals of a process, ways of inspecting the
 
 > cat /proc/${process_id}/status
 
->Name:   bash\
->Umask:  0022\
-> ...\
->VmPeak:    16204 kB\
->VmSize:    16152 kB\
->VmLck:         0 kB\
->VmPin:         0 kB\
->VmHWM:      4132 kB\
->VmRSS:      4132 kB\
+>Name:   bash  
+>Umask:  0022  
+> ...  
+>VmPeak:    16204 kB  
+>VmSize:    16152 kB  
+>VmLck:         0 kB  
+>VmPin:         0 kB  
+>VmHWM:      4132 kB  
+>VmRSS:      4132 kB  
 > ...
 
 Getting the statistics of a process using bash via /proc . 
 
-{{ "{% highlight c " }}%}
+{% highlight c %}
+
 	FILE* file = NULL;
 	file = fopen("/proc/self/status", "r");
 	
@@ -55,7 +56,8 @@ Getting the statistics of a process using bash via /proc .
 			   "/proc/self/status not found!\n");
 		return 1;
 	}
-{{ "{% endhighlight " }}%}
+
+{% endhighlight %}
 
 Getting the statistics of the calling process by opening  /proc/self/status as a file. 
 
