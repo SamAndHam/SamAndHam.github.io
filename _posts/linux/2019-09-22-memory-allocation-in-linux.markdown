@@ -9,18 +9,18 @@ This post tries to explore how malloc works internally in Linux
 
 *IN PROGRESS *
 
-* [Malloc](#Malloc)
-  - [Heap](#Heap)
-  - [Threshold](#Threshold)
+* [Malloc](##Malloc)
+  - [Heap](###Heap)
+  - [Threshold](###Threshold)
     - brk()/mmap()
-  - [Resident-or-not](#Resident-or-not)
+  - [Resident-or-not](###Resident-or-not)
     - Ensuring residency 
 
 ## Malloc
 
 Malloc is a  [ library call ](https://www.humblec.com/who-told-malloc-is-a-system-call/) which implements functions internally to allocate memory through system calls; itself
 not a system call. 
-Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/malloc.html) leaves its implementation to the runtime library.
+Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/malloc.html) leaves its implementation to the runtime library. (
 
 
 
