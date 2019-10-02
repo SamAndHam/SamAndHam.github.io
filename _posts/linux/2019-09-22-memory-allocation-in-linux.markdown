@@ -3,6 +3,7 @@ layout: post
 title:  "Memory allocation in Linux"
 date:   2019-09-22 21:37:52 +0800
 categories: Linux
+excerpt_separator: <!--more-->
 ---
 
 This post tries to explore how malloc works internally in Linux
@@ -16,7 +17,9 @@ This post tries to explore how malloc works internally in Linux
   - [Resident-or-not](#Resident-or-not)
     - Ensuring residency 
 * [Extra](#Extra)
-    
+
+<!--more-->
+
 ## Malloc
 {: id="Malloc"}
 Malloc is a  [ library call ](https://www.humblec.com/who-told-malloc-is-a-system-call/) which implements functions internally to allocate memory through system calls; itself

@@ -3,9 +3,12 @@ layout: post
 title:  "Memory in Linux"
 date:   2019-09-12 11:37:52 +0800
 categories: Linux
+excerpt_separator: <!--more-->
 ---
 
 This will be first in the series of articles to come that will be written in attempt to better understand memory in Linux.
+
+<!--more-->
 
 * Background reading
 	- Heap and Stack
@@ -22,3 +25,4 @@ This will be first in the series of articles to come that will be written in att
 	- With small amount of memory via malloc
 	- With big amount of memory via  malloc
 	- Multithreaded situations
+
