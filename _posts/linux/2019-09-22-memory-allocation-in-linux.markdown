@@ -28,7 +28,7 @@ Its [definition](https://pubs.opengroup.org/onlinepubs/009695399/functions/mallo
 
 
 
-### Heap
+### <u>Heap</u>
 {: id="Heap"}
 
 
@@ -81,7 +81,7 @@ but only 4132 kB of the total VmSize was resident in memory
 
 Memory are then mappedd in pages to the virtual memory of each process.
 
-### Threshold
+### <u>Threshold </u>
 {: id="Threshold"}
 
 
@@ -105,7 +105,7 @@ brk() expands in arena ( within heap)
 mmap() anywhere whitn virtual address space
 
 
-### Resident-or-not
+### <u>Resident-or-not</u>
 {: id="Resident-or-not"}
 
 to check if memory resisdent or not . mincore()
