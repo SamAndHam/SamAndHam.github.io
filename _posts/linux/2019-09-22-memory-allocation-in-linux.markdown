@@ -15,7 +15,8 @@ This post tries to explore how malloc works internally in Linux
     - brk()/mmap()
   - [Resident-or-not](#Resident-or-not)
     - Ensuring residency 
-
+* [Extra](#Extra)
+    
 ## Malloc
 {: id="Malloc"}
 Malloc is a  [ library call ](https://www.humblec.com/who-told-malloc-is-a-system-call/) which implements functions internally to allocate memory through system calls; itself
@@ -110,4 +111,17 @@ to check if memory resisdent or not . mincore()
 int mlock(const void *addr, size_t len);
 int mlockall(int flags);
 
+## Extra
+{: id="Extra"}
 
+etext, edata, end
+
+Program Text Segment
+Initialzed data segment
+Uninitialzed data segment
+
+check/cross compare  end and /proc/self/maps
+/proc/pid/stat
+/proc/pid/statm
+
+http://man7.org/linux/man-pages/man5/proc.5.html
