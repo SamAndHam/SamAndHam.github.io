@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Article: "Things I’ve learned in 20 years of programming""
-date:   2019-11-23 21:37:52 +0800
+title:  "Article: Things I’ve learned in 20 years of programming"
+date:   2019-11-22 21:37:52 +0800
 categories: Articles
 excerpt_separator: <!--more-->
 ---
