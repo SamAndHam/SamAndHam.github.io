@@ -1,0 +1,63 @@
+
+
+.header {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  #justify-content: space-around;
+  grid-area: header;
+  background-color: yellow;
+}
+
+.header > div {
+  margin: auto;
+  width: auto;
+  border-bottom: 2px solid yellow;
+}
+
+.header > div:hover {
+  margin: auto;
+  width: auto;
+  background-color: green;
+  border-bottom: 2px solid black;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: pink;
+  #margin: 0.5rem;
+  left: 0;
+  overflow: hidden;
+}
+
+.sidebar > ul {
+  list-style-type: none;
+  overflow: hidden;
+  padding-left: 3%;
+}
+
+.content { 
+  overflow: hidden;
+  grid-area: content;
+  background-color: blue;
+}
+
+.footer {
+
+  background-color: green;
+  grid-area: footer;
+}
+
+
+.container {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  grid-gap: 0.5%;
+  grid-template-columns: 10% 30% 30% 30%;
+  grid-template-areas:
+    "header header header header"
+    "sidebar content content content"
+    "footer footer footer footer";
+}
+
+
