@@ -6,7 +6,7 @@ function reply() {
   var toRet = "EMPTY";
 
 
-  xhr.open("GET", "Categories/" , true);
+  xhr.open("GET", "/Categories/" , true);
 
 xhr.onreadystatechange = function () {
 
