@@ -3,42 +3,73 @@
 .header {
   display: inline-flex;
   flex-wrap: nowrap;
-  #justify-content: space-around;
+  justify-content: space-around;
   grid-area: header;
-  background-color: yellow;
+  background-color:white;
+
+  margin: 0.1rem;
+  margin-right: 1%;
+  border: 1px solid black;
+  border-radius: 25px;
 }
 
 .header > div {
   margin: auto;
   width: auto;
-  border-bottom: 2px solid yellow;
+  font-size: 1.5vw;
+  border-bottom: 2px solid white;
 }
 
 .header > div:hover {
-  margin: auto;
   width: auto;
-  background-color: green;
-  border-bottom: 2px solid black;
+  height: auto;
+  background-color: #f0f0f0;
+  border-bottom: 2px solid gray;
+  border-radius: 2px;
 }
 
 .sidebar {
   grid-area: sidebar;
-  background-color: pink;
-  #margin: 0.5rem;
-  left: 0;
+  background-color: white;
+
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  margin-left: 3%;
+  
+  border: 1px solid black;
+  border-radius: 2px;
   overflow: hidden;
 }
 
 .sidebar > ul {
   list-style-type: none;
   overflow: hidden;
-  padding-left: 3%;
+  padding-left: 0%;
+  font-size: 1.5vw;
 }
 
+.sidebar > ul >li {
+  border: 1px solid gray;
+  text-align: left;
+  border-radius: 2px;
+}
+
+.sidebar > ul >li:hover {
+  border: 1px solid gray;
+  text-align: left;
+  border-radius: 2px;
+  background-color: #f0f0f0;
+}
 .content { 
   overflow: hidden;
   grid-area: content;
-  background-color: blue;
+  background-color: white;
+  border: 1px solid black; 
+  border-radius: 2px;
+
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+  margin-right: 1.5%;
 }
 
 .footer {
@@ -51,8 +82,13 @@
 .container {
   height: 100%;
   overflow: hidden;
+  #outline: 0.5px solid gray;
+  border-radius: 5px;
+  background-color: white;
+
+
   display: grid;
-  grid-gap: 0.5%;
+  grid-gap: 0.3%;
   grid-template-columns: 10% 30% 30% 30%;
   grid-template-areas:
     "header header header header"
@@ -60,4 +96,6 @@
     "footer footer footer footer";
 }
 
-
+body {
+  background-color: #3b3b3b;
+}
