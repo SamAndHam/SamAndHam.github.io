@@ -6,7 +6,7 @@ function reply() {
   var toRet = "EMPTY";
 
 
-  xhr.open("GET", "/" , true);
+  xhr.open("GET", "Categories/Blog/2021_1_31/1_HelloWorld.html" , true);
 
 xhr.onreadystatechange = function () {
 
@@ -14,16 +14,13 @@ xhr.onreadystatechange = function () {
   // In local files, status is 0 upon success in Mozilla Firefox
   if(xhr.readyState === XMLHttpRequest.DONE) {
     var status = xhr.status;
-    console.log(xhr.responseText);
-    var ret = xhr.responseText
-    let elementList = document.getElementById("content");
+    //var parser = new DOMParser();
+    //var ret = parser.parseFromString( xhr.responseText, "text/html");
+    var xmlRet = xhr.responseText;
+    //var synopsis = xmlRet.getElementsByClassName("synopsis");
+
+    document.getElementById("content").innerHTML = xmlRet;
     
-    var node = document.createElement("P");
-    var text = document.createTextNode(ret);
-    node.appendChild(text);
-
-    elementList.appendChild(node);
-
   }
 };
 
