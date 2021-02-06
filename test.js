@@ -16,6 +16,17 @@ function initList() {
   xhr.send();
 }
 
+function parseElementContent(num) {
+  document.getElementById("content").innerHTML += "<hr size=1>";
+  document.getElementById("content").innerHTML += "<p>";
+  document.getElementById("content").innerHTML += JSON_STATC_DATA.Blog[0].Title;
+  document.getElementById("content").innerHTML += "</p>";
+  document.getElementById("content").innerHTML += "<p>";
+  document.getElementById("content").innerHTML += JSON_STATC_DATA.Blog[0].Synopsis;
+  document.getElementById("content").innerHTML += "</p>";
+  document.getElementById("content").innerHTML += "<hr size=1>";
+  
+}
 
 function loadSubPage() {
   console.log(JSON_STATC_DATA);
@@ -28,10 +39,11 @@ function loadSubPage() {
     case "BLOG": {
       console.log(Page_State);
       console.log(JSON_STATC_DATA.Blog.length);
-      console.log(JSON_STATC_DATA.Blog[0].Path); 
-      document.getElementById("content").innerHTML = JSON_STATC_DATA.Blog[0].Title;
-      document.getElementById("content").innerHTML += "<br>";
-      document.getElementById("content").innerHTML += JSON_STATC_DATA.Blog[0].Synopsis;
+      console.log(JSON_STATC_DATA.Blog[0].Path);
+      for ( var i = 0; i < 50; i++ ) {
+        parseElementContent(i);
+      }      
+
     }
       break;
     case "LANGUAGE":
