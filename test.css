@@ -29,6 +29,7 @@
 }
 
 .sidebar {
+  display: inline-block;
   grid-area: sidebar;
   background-color: white;
 
