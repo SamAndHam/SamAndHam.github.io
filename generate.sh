@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 # Page->Directory->Date->FilePath | Title |  Synopsis
 
 categories=()
@@ -22,8 +23,9 @@ format_entry() {
 
 parse_file() {
   FILE_NAME=$(echo $1 | cut --delimiter='/' --fields=3 )
-  TITLE=$(cat $1 | hq .title text)
-  SYNOPSIS=$(cat $1 | hq .synopsis text)
+  TITLE=$(cat $1 | hq \#title text)
+  SYNOPSIS=$(cat $1 | hq \#synopsis text)
+  TAGS=$(cat $1 | hq \#tags text)
 
   ISLAST=$2
 
@@ -31,6 +33,7 @@ parse_file() {
   format_entry "Path" "$1"
   format_entry "FileName" "$FILE_NAME"
   format_entry "Title" "$TITLE"
+  format_entry "Tags" "$TAGS"
   format_entry "Synopsis" "$SYNOPSIS" 1
 
   if [[ $2 == 0 ]]; then 
