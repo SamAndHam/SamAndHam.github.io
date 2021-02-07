@@ -22,7 +22,8 @@ format_entry() {
 }
 
 parse_file() {
-  FILE_NAME=$(echo $1 | cut --delimiter='/' --fields=3 )
+  FILE_NAME=$(echo $1 | cut --delimiter='/' --fields=4 )
+  DATE=$(echo $1 | cut --delimiter='/' --fields=3 )
   TITLE=$(cat $1 | hq \#title text)
   SYNOPSIS=$(cat $1 | hq \#synopsis text)
   TAGS=$(cat $1 | hq \#tags text)
@@ -32,6 +33,7 @@ parse_file() {
   echo "{"
   format_entry "Path" "$1"
   format_entry "FileName" "$FILE_NAME"
+  format_entry "Date" "$DATE"
   format_entry "Title" "$TITLE"
   format_entry "Tags" "$TAGS"
   format_entry "Synopsis" "$SYNOPSIS" 1

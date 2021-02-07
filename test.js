@@ -17,15 +17,26 @@ function initList() {
 }
 
 function parseElementContent(num) {
-  document.getElementById("content").innerHTML += "<hr size=1>";
-  document.getElementById("content").innerHTML += "<p>";
-  document.getElementById("content").innerHTML += JSON_STATC_DATA.Blog[0].Title;
-  document.getElementById("content").innerHTML += "</p>";
-  document.getElementById("content").innerHTML += "<p>";
-  document.getElementById("content").innerHTML += JSON_STATC_DATA.Blog[0].Synopsis;
-  document.getElementById("content").innerHTML += "</p>";
-  document.getElementById("content").innerHTML += "<hr size=1>";
+  var contentDiv = document.createElement("DIV");
+  contentDiv.className = "contentDiv";
+
+  var title       = document.createElement("DIV");
+  title.className ="contentTitle";
+
+  var date        = document.createElement("DIV");
+  date.className = "contentDate";
+
+  var synopsis   = document.createElement("P");
+  synopsis.className = "contentSynopsis";
+
+  title.innerHTML = JSON_STATC_DATA.Blog[num].Title;
+  date.innerHTML = JSON_STATC_DATA.Blog[num].Date.replace(/_/g,"/");
+  synopsis.innerHTML = JSON_STATC_DATA.Blog[num].Synopsis;
   
+  contentDiv.appendChild(title);
+  contentDiv.appendChild(date);
+  contentDiv.appendChild(synopsis);
+  document.getElementById("content").appendChild(contentDiv); 
 }
 
 function loadSubPage() {
@@ -40,7 +51,7 @@ function loadSubPage() {
       console.log(Page_State);
       console.log(JSON_STATC_DATA.Blog.length);
       console.log(JSON_STATC_DATA.Blog[0].Path);
-      for ( var i = 0; i < 50; i++ ) {
+      for ( var i = 0; i < JSON_STATC_DATA.Blog.length; i++ ) {
         parseElementContent(i);
       }      
 

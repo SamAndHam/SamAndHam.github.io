@@ -16,7 +16,7 @@
 .header > div {
   margin: auto;
   width: auto;
-  font-size: 1.5vw;
+  font-size: 1.5em;
   border-bottom: 2px solid white;
 }
 
@@ -66,9 +66,9 @@
 .content { 
   overflow: hidden;
   grid-area: content;
-  background-color: white;
-  border: 1px solid black; 
-  border-radius: 4px;
+  #background-color: white;
+  #border: 1px solid black; 
+  #border-radius: 4px;
 
   margin-top: 0.5rem;
   margin-bottom: 0.1rem;
@@ -102,4 +102,36 @@
 
 body {
   background-color: #3b3b3b;
+}
+
+.contentDiv {
+
+  background-color: white;
+
+
+  border: 1px solid black; 
+  border-radius: 10px;
+}
+
+.contentDiv > div ,p  {
+  margin-left: 1%;
+}
+
+.contentTitle {
+  padding-left: 1%;
+  font-size: 100%;
+  margin-top: 0.5%;
+
+  border-left: 1px solid gray;
+  border-bottom: 1px solid gray;  
+} 
+.contentDate {
+  font-size: 60%;
+  padding-left: 3em;
+}
+.contentSynopsis {
+
+  border-left: 1px solid gray;  
+  font-size: 100%;
+  white-space: pre-line;
 }
