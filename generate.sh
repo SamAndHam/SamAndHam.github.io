@@ -69,8 +69,22 @@ iterate_dates() {
   DIR=$1 #directory path
   dir_name=${DIR%*/}
   #echo "$dir_name $DIR"
+  NUM=$(ls $DIR/ | wc -l )
+
+  local COUNTER=0
+
   for date_dir in $DIR*/; do
+    ((COUNTER++))
+
+    DATE=$(echo $date_dir | cut --delimiter='/' --fields=3 )
+    echo "\"$DATE\" : ["
     iterate_files $date_dir
+
+    if (( COUNTER == NUM )); then
+      echo "]"
+    else
+      echo "],"
+    fi
   done
 
   #check if folder has subfolders
@@ -91,13 +105,13 @@ count=0
 for sub_dir in ${categories[@]}; do
   ((count++))
   format_entry $( echo  $sub_dir  | cut --delimiter='/' --fields=2)
-  echo "["
+  echo "{"
   iterate_dates $sub_dir
 
   if [[ $count == ${#categories[@]} ]]; then
-    echo "]"
+    echo "}"
   else
-    echo "],"
+    echo "},"
   fi
 
 done
