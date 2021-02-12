@@ -1,61 +1,68 @@
 
 
 .header {
-  display: inline-flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
   grid-area: header;
   background-color:white;
 
-  margin: 0.1rem;
-  margin-right: 1%;
   border: 1px solid black;
-  border-radius: 25px;
+  border-radius: 5px;
+
+  overflow: hidden;
 }
 
 .header > div {
-  margin: auto;
   width: auto;
-  font-size: 100%;
-  border-bottom: 2px solid white;
+  height: auto;
+  border-radius: 5px;
+
+  #text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 0.8em;
 }
 
 .header > div:hover {
   width: auto;
   height: auto;
   background-color: #f0f0f0;
-  border-bottom: 2px solid gray;
-  border-radius: 2px;
 }
 
 .sidebar {
   display: inline-block;
   grid-area: sidebar;
-  #background-color: white;
+  background-color: white;
 
   margin-top: 0.5rem;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.5rem;
   margin-left: 3%;
   margin-right: 3%;
   
   overflow: hidden;
+  border-radius: 5px;
 }
 
 .sidebar > ul {
   list-style-type: none;
   overflow: hidden;
   padding-left: 0%;
-  font-size: 1.5vw;
+  #font-size: 1.5vw;
+  font-size: 0.8em;
 }
 
 .sidebar > ul >li {
   background-color: white;
   border-radius: 7px;
-  margin-bottom: 0.9rem;
   #border: 1px solid gray;
   text-align: left;
   border-radius: 2px;
+
+  padding-left: 5%;
 }
+
 
 .sidebar > ul >li:hover {
   #border: 1px solid gray;
@@ -70,9 +77,12 @@
   #border: 1px solid black; 
   #border-radius: 4px;
 
-  margin-top: 0.5rem;
   margin-bottom: 0.1rem;
   margin-right: 1.5%;
+}
+
+.content > div:hover {
+  background-color: #f0f0f0;
 }
 
 .footer {
@@ -95,13 +105,15 @@
   grid-gap: 0.3%;
   grid-template-columns: 10% 30% 30% 30%;
   grid-template-areas:
-    "header header header header"
+    "header content content content"
     "sidebar content content content"
-    "footer footer footer footer";
+    "sidebar content content content"
+    "sidebar content content content"
 }
 
 body {
-  background-color: #3b3b3b;
+  #background-color: #3b3b3b;
+  background-image: linear-gradient( #3b3b3b, #677475 );
 }
 
 .contentDiv {

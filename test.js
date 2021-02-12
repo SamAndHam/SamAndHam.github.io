@@ -3,15 +3,16 @@ var Previous_State = ""
 var Page_SelectedDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
 
 var JSON_STATC_DATA;
-var JSON_KEYS;
+var JSON_HEADER_KEYS;
 
 function initList() {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       JSON_STATC_DATA = JSON.parse(xhr.responseText);
-      loadHeader();
+      Page_SelectedDate = JSON_STATC_DATA[0];
       loadDateSidebar();
+      loadHeader();
       loadSubPage();
     }
   }
@@ -33,9 +34,9 @@ function parseElementContent(num) {
   var synopsis   = document.createElement("P");
   synopsis.className = "contentSynopsis";
 
-  title.innerHTML = JSON_STATC_DATA[Page_State][Page_SelectedDate][num].Title;
-  date.innerHTML = JSON_STATC_DATA[Page_State][Page_SelectedDate][num].Date.replace(/_/g,"/");
-  synopsis.innerHTML = JSON_STATC_DATA[Page_State][Page_SelectedDate][num].Synopsis;
+  title.innerHTML = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Title;
+  date.innerHTML = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Date.replace(/_/g,"/");
+  synopsis.innerHTML = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Synopsis;
   
   contentDiv.appendChild(title);
   contentDiv.appendChild(date);
@@ -45,11 +46,11 @@ function parseElementContent(num) {
 
 
 function loadHeader() {
-  JSON_KEYS = Object.keys(JSON_STATC_DATA);
+  JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA[Page_SelectedDate]);
 
-  for (var i = 0; i < JSON_KEYS.length; i++) {
+  for (var i = 0; i < JSON_HEADER_KEYS.length; i++) {
     var header = document.createElement("DIV");
-    header.innerHTML = JSON_KEYS[i];
+    header.innerHTML = JSON_HEADER_KEYS[i];
     document.getElementById("header").appendChild(header);
   }
 
@@ -57,25 +58,31 @@ function loadHeader() {
 
 function loadDateSidebar() {
  //to modify JSON to include date as key
-  var date_keys = Object.keys(JSON_STATC_DATA[Page_State]);
+  var date_keys = Object.keys(JSON_STATC_DATA);
 
   var dateUL = document.createElement("UL");
   
-   for (var i = 0; i < date_keys.length; i++) {
+   for (var i = date_keys.length -1 ; i > -1 ; i--) {
     var dateLI = document.createElement("LI");
     dateLI.innerHTML = date_keys[i];
-    console.log(date_keys[i]);
-    console.log(date_keys.length);
+
+    var date_var = date_keys[i].split("_", 3);
+    var year = date_var[0];
+    var month = date_var[1];
+
+    console.log(year);
+    console.log(month);
+
     dateUL.appendChild(dateLI);
   } 
   document.getElementById("sidebar").appendChild(dateUL);
-  Page_SelectedDate = date_keys[0];
+  Page_SelectedDate = date_keys[date_keys.length -1];
 }
 
 function loadSubPage() {
   console.log(JSON_STATC_DATA);
 
-  for ( var i = 0; i < JSON_STATC_DATA[Page_State][Page_SelectedDate].length; i++ ) {
+  for ( var i = 0; i < JSON_STATC_DATA[Page_SelectedDate][Page_State].length; i++ ) {
     parseElementContent(i);
   }      
 
@@ -97,33 +104,10 @@ function main() {
   console.log("parse json");
   initList();
 
-  var xhr = new XMLHttpRequest();
-  
   var toRet = "EMPTY";
 
 
-  xhr.open("GET", "Categories/Blog/2021_1_31/1_HelloWorld.html" , true);
 
-xhr.onreadystatechange = function () {
-
-
-  // In local files, status is 0 upon success in Mozilla Firefox
-  if(xhr.readyState === XMLHttpRequest.DONE) {
-    var status = xhr.status;
-    var xmlRet = xhr.responseText;
-
-   // document.getElementById("content").innerHTML = xmlRet;
-
-
-    var parser = new DOMParser();
-    var resp  = parser.parseFromString(xmlRet , "text/html");
-    //var x = retXML.getElementById("title").innerHTML;
-    console.log(resp.getElementById("title").innerHTML);
-  }
-};
-
-
-  xhr.send();
 
   return toRet;
 }

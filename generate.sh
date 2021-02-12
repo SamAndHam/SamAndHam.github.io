@@ -23,7 +23,7 @@ format_entry() {
 
 parse_file() {
   FILE_NAME=$(echo $1 | cut --delimiter='/' --fields=4 )
-  DATE=$(echo $1 | cut --delimiter='/' --fields=3 )
+  DATE=$(echo $1 | cut --delimiter='/' --fields=2 )
   TITLE=$(cat $1 | hq \#title text)
   SYNOPSIS=$(cat $1 | hq \#synopsis text)
   TAGS=$(cat $1 | hq \#tags text)
