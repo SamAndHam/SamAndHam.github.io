@@ -1,6 +1,7 @@
 var Page_State = "Blog"  // HOME, PROGRAMMING LANGUAGE READING
 var Previous_State = ""
 var Page_SelectedDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
+var Base_URL = window.location.href;
 
 var JSON_STATC_DATA;
 var JSON_HEADER_KEYS;
@@ -21,6 +22,7 @@ function initList() {
   xhr.send();
 }
 
+
 function parseElementContent(num) {
   var hrefContainer = document.createElement("a");
   hrefContainer.href = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path;
@@ -28,17 +30,43 @@ function parseElementContent(num) {
 
   var contentDiv = document.createElement("DIV");
   contentDiv.className = "contentDiv";
-  contentDiv.onclick  = function() {
-    var innerSite = document.createElement("object");
-    innerSite.setAttribute("data", JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path) ;
-    innerSite.setAttribute("type", "text/html");
-    
-    var innerDiv = document.createElement("div");
-    innerDiv.appendChild(innerSite);
+  contentDiv.setAttribute("data", JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path) ;
+  //callback function on click
+  contentDiv.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+        var container = document.implementation.createHTMLDocument("ret");        
+        container.write(xhr.responseText);
 
-    document.getElementById("content").innerHTML = "";
-    document.getElementById("content").appendChild(innerDiv);
+        document.getElementById("content").innerHTML = "";
+        var contentTitle = document.createElement("DIV");
+        contentTitle.className = "contentTitle";
+        contentTitle.innerHTML = container.getElementById("title").innerHTML;
+
+        var contentDate        = document.createElement("DIV");
+        contentDate.className  = "contentDate";
+        contentDate.innerHTML  = Page_SelectedDate;
+
+        var contentData        =  document.createElement("DIV");
+        contentData.className  = "contentData";
+        contentData.innerHTML  = container.getElementById("synopsis").innerHTML +  container.getElementById("contents").innerHTML; 
+
+        var contentDiv          = document.createElement("DIV");
+        contentDiv.className    = "contentDiv";
+        contentDiv.appendChild(contentTitle);
+        contentDiv.appendChild(contentDate);
+        contentDiv.appendChild(contentData); 
+        document.getElementById("content").appendChild(contentDiv);
+
+      }
+    }
+
+    xhr.open("GET", JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path , true);
+    xhr.send();
+
   };
+
 
   var title       = document.createElement("DIV");
   title.className ="contentTitle";
@@ -97,20 +125,12 @@ function loadDateSidebar() {
 }
 
 function loadSubPage() {
-  console.log(JSON_STATC_DATA);
 
   for ( var i = 0; i < JSON_STATC_DATA[Page_SelectedDate][Page_State].length; i++ ) {
     parseElementContent(i);
   }      
 
   return;
-}
-
-
-function modifyPageState_OnButtonClick(newState) {
-  //SubPage button clicked-> Change state -> Reload page
-  Page_State = newState;
-  loadSubPage();
 }
 
 
@@ -122,9 +142,6 @@ function main() {
   initList();
 
   var toRet = "EMPTY";
-
-
-
 
   return toRet;
 }
