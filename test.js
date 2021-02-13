@@ -22,8 +22,23 @@ function initList() {
 }
 
 function parseElementContent(num) {
+  var hrefContainer = document.createElement("a");
+  hrefContainer.href = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path;
+  
+
   var contentDiv = document.createElement("DIV");
   contentDiv.className = "contentDiv";
+  contentDiv.onclick  = function() {
+    var innerSite = document.createElement("object");
+    innerSite.setAttribute("data", JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path) ;
+    innerSite.setAttribute("type", "text/html");
+    
+    var innerDiv = document.createElement("div");
+    innerDiv.appendChild(innerSite);
+
+    document.getElementById("content").innerHTML = "";
+    document.getElementById("content").appendChild(innerDiv);
+  };
 
   var title       = document.createElement("DIV");
   title.className ="contentTitle";
@@ -41,6 +56,8 @@ function parseElementContent(num) {
   contentDiv.appendChild(title);
   contentDiv.appendChild(date);
   contentDiv.appendChild(synopsis);
+
+  hrefContainer.appendChild(contentDiv);
   document.getElementById("content").appendChild(contentDiv); 
 }
 
