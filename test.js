@@ -59,6 +59,7 @@ function parseElementContent(num) {
         contentDiv.appendChild(contentData); 
         document.getElementById("content").appendChild(contentDiv);
 
+        history.replaceState('','', JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path);
       }
     }
 
@@ -114,9 +115,6 @@ function loadDateSidebar() {
     var date_var = date_keys[i].split("_", 3);
     var year = date_var[0];
     var month = date_var[1];
-
-    console.log(year);
-    console.log(month);
 
     dateUL.appendChild(dateLI);
   } 
