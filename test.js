@@ -3,8 +3,10 @@ var Previous_State = ""
 var Page_SelectedDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
 var Base_URL = window.location.href;
 
-var JSON_STATC_DATA;
-var JSON_HEADER_KEYS;
+var historyList = [];  //To maintain history
+
+var JSON_STATC_DATA;   // List of files JSON 
+var JSON_HEADER_KEYS;  // Date keys
 
 function initList() {
   var xhr = new XMLHttpRequest();
@@ -15,6 +17,7 @@ function initList() {
       loadDateSidebar();
       loadHeader();
       loadSubPage();
+      historyList.push(window.location.href);
     }
   }
 
@@ -59,7 +62,9 @@ function parseElementContent(num) {
         contentDiv.appendChild(contentData); 
         document.getElementById("content").appendChild(contentDiv);
 
-        history.replaceState('','', JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path);
+        history.pushState( '', JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path,JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path);
+        historyList.push(window.location.href);
+        console.log(historyList);
       }
     }
 
@@ -123,11 +128,13 @@ function loadDateSidebar() {
 }
 
 function loadSubPage() {
+  document.getElementById("content").innerHTML = "";
 
   for ( var i = 0; i < JSON_STATC_DATA[Page_SelectedDate][Page_State].length; i++ ) {
     parseElementContent(i);
   }      
-
+  
+  history.pushState('Home','Home',Base_URL );
   return;
 }
 
@@ -155,5 +162,14 @@ function test()  {
 
 window.onload=main;
 
-
+window.onpopstate = function() {
+  historyList.pop();
+  console.log(historyList);
+  if (historyList.length == 0) {
+    history.go(-1);
+    location.reload();
+  } else {
+    location.reload();
+  }
+}
 
