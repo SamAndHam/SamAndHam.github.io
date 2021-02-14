@@ -169,7 +169,8 @@ window.onpopstate = function() {
     history.go(-1);
     location.reload();
   } else {
-    location.reload();
+    //location.reload();
+    loadSubPage();
   }
 }
 
