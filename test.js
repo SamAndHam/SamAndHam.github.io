@@ -1,4 +1,4 @@
-var Page_State = "Blog"  // HOME, PROGRAMMING LANGUAGE READING
+var Page_State = "All"  // All, Blog, Programming, Language, Linux , Readings, Links
 var Previous_State = ""
 var Page_SelectedDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
 var Base_URL = window.location.href;
@@ -26,14 +26,14 @@ function initList() {
 }
 
 
-function parseElementContent(num) {
+function parseElementContent(num, SelectedDate, State) {
   var hrefContainer = document.createElement("a");
-  hrefContainer.href = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path;
+  hrefContainer.href = JSON_STATC_DATA[SelectedDate][State][num].Path;
   
 
   var contentDiv = document.createElement("DIV");
   contentDiv.className = "contentDiv";
-  contentDiv.setAttribute("data", JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path) ;
+  contentDiv.setAttribute("data", JSON_STATC_DATA[SelectedDate][State][num].Path) ;
   //callback function on click
   contentDiv.onclick = function() {
     var xhr = new XMLHttpRequest();
@@ -49,7 +49,7 @@ function parseElementContent(num) {
 
         var contentDate        = document.createElement("DIV");
         contentDate.className  = "contentDate";
-        contentDate.innerHTML  = Page_SelectedDate;
+        contentDate.innerHTML  = SelectedDate;
 
         var contentData        =  document.createElement("DIV");
         contentData.className  = "contentData";
@@ -62,13 +62,13 @@ function parseElementContent(num) {
         contentDiv.appendChild(contentData); 
         document.getElementById("content").appendChild(contentDiv);
 
-        history.pushState( '', JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path,JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path);
+        history.pushState( '', JSON_STATC_DATA[SelectedDate][State][num].Path,JSON_STATC_DATA[SelectedDate][State][num].Path);
         historyList.push(window.location.href);
         console.log(historyList);
       }
     }
 
-    xhr.open("GET", JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Path , true);
+    xhr.open("GET", JSON_STATC_DATA[SelectedDate][State][num].Path , true);
     xhr.send();
 
   };
@@ -83,9 +83,9 @@ function parseElementContent(num) {
   var synopsis   = document.createElement("P");
   synopsis.className = "contentSynopsis";
 
-  title.innerHTML = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Title;
-  date.innerHTML = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Date.replace(/_/g,"/");
-  synopsis.innerHTML = JSON_STATC_DATA[Page_SelectedDate][Page_State][num].Synopsis;
+  title.innerHTML = JSON_STATC_DATA[SelectedDate][State][num].Title;
+  date.innerHTML = JSON_STATC_DATA[SelectedDate][State][num].Date.replace(/_/g,"/");
+  synopsis.innerHTML = JSON_STATC_DATA[SelectedDate][State][num].Synopsis;
   
   contentDiv.appendChild(title);
   contentDiv.appendChild(date);
@@ -98,6 +98,10 @@ function parseElementContent(num) {
 
 function loadHeader() {
   JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA[Page_SelectedDate]);
+
+  var all = document.createElement("DIV");
+  all.innerHTML = "All"
+  document.getElementById("header").appendChild(all);  
 
   for (var i = 0; i < JSON_HEADER_KEYS.length; i++) {
     var header = document.createElement("DIV");
@@ -129,11 +133,19 @@ function loadDateSidebar() {
 
 function loadSubPage() {
   document.getElementById("content").innerHTML = "";
+  if (Page_State == "All") {
+    for (var i = 0 ; i < JSON_HEADER_KEYS.length; i++) {
+      var currentKey = JSON_HEADER_KEYS[i];
 
-  for ( var i = 0; i < JSON_STATC_DATA[Page_SelectedDate][Page_State].length; i++ ) {
-    parseElementContent(i);
-  }      
-  
+      for ( var z = 0; z < JSON_STATC_DATA[Page_SelectedDate][ currentKey].length; z++ ) 
+        parseElementContent(z, Page_SelectedDate, JSON_HEADER_KEYS[i]);
+    }
+
+  } else {
+    for ( var i = 0; i < JSON_STATC_DATA[Page_SelectedDate][Page_State].length; i++ ) {
+      parseElementContent(i, Page_SelectedDate, Page_State);
+    }      
+  }
   history.pushState('Home','Home',Base_URL );
   return;
 }
