@@ -102,11 +102,19 @@ function loadHeader() {
 
   var all = document.createElement("DIV");
   all.innerHTML = "All"
+  all.onclick = function() {
+    Page_State = this.innerHTML;
+    loadSubPage();
+  }
   document.getElementById("header").appendChild(all);  
 
   for (var i = 0; i < JSON_HEADER_KEYS.length; i++) {
     var header = document.createElement("DIV");
     header.innerHTML = JSON_HEADER_KEYS[i];
+    header.onclick = function () {
+      Page_State = this.innerHTML;
+      loadSubPage();
+    }
     document.getElementById("header").appendChild(header);
   }
 
