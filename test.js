@@ -49,10 +49,11 @@ function parseElementContent(num, SelectedDate, State) {
 
         var contentDate        = document.createElement("DIV");
         contentDate.className  = "contentDate";
-        contentDate.innerHTML  = SelectedDate;
+        contentDate.innerHTML  = State + " | " +  SelectedDate;
 
         var contentData        =  document.createElement("DIV");
         contentData.className  = "contentData";
+        console.log(State);
         contentData.innerHTML  = container.getElementById("synopsis").innerHTML +  container.getElementById("contents").innerHTML; 
 
         var contentDiv          = document.createElement("DIV");
@@ -84,7 +85,7 @@ function parseElementContent(num, SelectedDate, State) {
   synopsis.className = "contentSynopsis";
 
   title.innerHTML = JSON_STATC_DATA[SelectedDate][State][num].Title;
-  date.innerHTML = JSON_STATC_DATA[SelectedDate][State][num].Date.replace(/_/g,"/");
+  date.innerHTML = State + " | " + JSON_STATC_DATA[SelectedDate][State][num].Date.replace(/_/g,"/") ;
   synopsis.innerHTML = JSON_STATC_DATA[SelectedDate][State][num].Synopsis;
   
   contentDiv.appendChild(title);
