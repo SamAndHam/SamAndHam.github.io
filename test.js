@@ -1,22 +1,22 @@
 var Page_State = "All"  // All, Blog, Programming, Language, Linux , Readings, Links
 var Previous_State = ""
-var Page_SelectedDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');;
+var Page_SelectedDate = "All";
 var Base_URL = window.location.href;
 
 var historyList = [];  //To maintain history
 
 var JSON_STATC_DATA;   // List of files JSON 
-var JSON_HEADER_KEYS;  // Date keys
+var JSON_HEADER_KEYS;
+var JSON_DATE_KEYS = new Set();
 
 function initList() {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       JSON_STATC_DATA = JSON.parse(xhr.responseText);
-      Page_SelectedDate = JSON_STATC_DATA[0];
-      loadDateSidebar();
       loadHeader();
-      loadSubPage();
+      loadDateSidebar();
+      //loadSubPage();
       historyList.push(window.location.href);
     }
   }
@@ -98,12 +98,13 @@ function parseElementContent(num, SelectedDate, State) {
 
 
 function loadHeader() {
-  JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA[Page_SelectedDate]);
+  JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA);
 
   var all = document.createElement("DIV");
   all.innerHTML = "All"
   all.onclick = function() {
     Page_State = this.innerHTML;
+    loadDateSidebar();
     loadSubPage();
   }
   document.getElementById("header").appendChild(all);  
@@ -113,6 +114,7 @@ function loadHeader() {
     header.innerHTML = JSON_HEADER_KEYS[i];
     header.onclick = function () {
       Page_State = this.innerHTML;
+      loadDateSidebar();
       loadSubPage();
     }
     document.getElementById("header").appendChild(header);
@@ -121,40 +123,62 @@ function loadHeader() {
 }
 
 function loadDateSidebar() {
- //to modify JSON to include date as key
-  var date_keys = Object.keys(JSON_STATC_DATA);
+  JSON_DATE_KEYS.clear();
+  document.getElementById("sidebar").innerHTML = "";
 
   var dateUL = document.createElement("UL");
+
+  var dateLiAll = document.createElement("LI");
+  dateLiAll.innerHTML = "All";
+  dateLiAll.onclick  = function() {
+    Page_SelectedDate = this.innerHTML;
+    loadSubPage();
+  }
+
+  dateUL.appendChild(dateLiAll);
+
+  if (Page_State == "All") {
+    console.log("All");
+    for (var i = 0; i < JSON_HEADER_KEYS.length; i++) {
+      var tmpDateKeys = Object.keys(JSON_STATC_DATA[ JSON_HEADER_KEYS[i]]);
+
+      for(var z=0; z < tmpDateKeys.length;z++)
+        JSON_DATE_KEYS.add(tmpDateKeys[z]);
+    }
+  } else {
+    var tmpDateKeys = Object.keys(JSON_STATC_DATA[Page_State]);
+    console.log(tmpDateKeys);
+    for(var z=0; z < tmpDateKeys.length;z++)
+      JSON_DATE_KEYS.add(tmpDateKeys[z]);
+ 
+  }
+
   
-   for (var i = date_keys.length -1 ; i > -1 ; i--) {
-    var dateLI = document.createElement("LI");
-    dateLI.innerHTML = date_keys[i];
+  JSON_DATE_KEYS.forEach( function(value) {
+    var dateLi = document.createElement("LI");
+    dateLi.innerHTML = value;
+    dateLi.onclick = function() {
+      Page_SelectedDate = this .innerHTML;
+      loadSubPage();
+      console.log(Page_SelectedDate);
+    }
+    dateUL.appendChild(dateLi);
+  })
 
-    var date_var = date_keys[i].split("_", 3);
-    var year = date_var[0];
-    var month = date_var[1];
-
-    dateUL.appendChild(dateLI);
-  } 
   document.getElementById("sidebar").appendChild(dateUL);
-  Page_SelectedDate = date_keys[date_keys.length -1];
 }
 
 function loadSubPage() {
   document.getElementById("content").innerHTML = "";
+            //parseElementContent(z, JSON_DATE_KEYS[j], JSON_HEADER_KEYS[i]);
   if (Page_State == "All") {
-    for (var i = 0 ; i < JSON_HEADER_KEYS.length; i++) {
-      var currentKey = JSON_HEADER_KEYS[i];
+    if (Page_SelectedDate == "All") {
 
-      for ( var z = 0; z < JSON_STATC_DATA[Page_SelectedDate][ currentKey].length; z++ ) 
-        parseElementContent(z, Page_SelectedDate, JSON_HEADER_KEYS[i]);
     }
-
   } else {
-    for ( var i = 0; i < JSON_STATC_DATA[Page_SelectedDate][Page_State].length; i++ ) {
-      parseElementContent(i, Page_SelectedDate, Page_State);
-    }      
+    
   }
+
   history.pushState('Home','Home',Base_URL );
   return;
 }

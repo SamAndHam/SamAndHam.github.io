@@ -1,72 +1,62 @@
 {
-  "2020_5_24": {
-    "Blog": [
+  "Blog": {
+    "2021_01_30": [
       {
-        "Path": "Categories/2020_5_24/Blog/1_HelloWorld.html",
+        "Path": "Categories/Blog/2021_01_30/1_HelloWorld.html",
         "FileName": "1_HelloWorld.html",
-        "Date": "2020_5_24",
+        "Date": "Blog",
         "Title": "Hello World",
         "Tags": "TEST,ABC,123",
         "Synopsis": "Hello World First Post"
-      },
-      {
-        "Path": "Categories/2020_5_24/Blog/2_HelloWorld.html",
-        "FileName": "2_HelloWorld.html",
-        "Date": "2020_5_24",
-        "Title": "Hello World",
-        "Tags": "TEST,ABC,123",
-        "Synopsis": "Hello World Second Testing Post"
-      },
-      {
-        "Path": "Categories/2020_5_24/Blog/3_HelloWorld.html",
-        "FileName": "3_HelloWorld.html",
-        "Date": "2020_5_24",
-        "Title": "Hello World",
-        "Tags": "TEST,ABC,123",
-        "Synopsis": "Hello World Third Post \n content\n test"
       }
-    ],
-    "Language": [],
-    "Linux": []
+    ]
   },
-  "2021_1_31": {
-    "Blog": [
+  "Investment": {
+    "2021_1_31": [
       {
-        "Path": "Categories/2021_1_31/Blog/1_HelloWorld.html",
+        "Path": "Categories/Investment/2021_1_31/1_HelloWorld.html",
         "FileName": "1_HelloWorld.html",
-        "Date": "2021_1_31",
-        "Title": "Hello World",
-        "Tags": "TEST,ABC,123",
-        "Synopsis": "Hello World First Post"
-      },
-      {
-        "Path": "Categories/2021_1_31/Blog/2_HelloWorld.html",
-        "FileName": "2_HelloWorld.html",
-        "Date": "2021_1_31",
-        "Title": "Hello World",
-        "Tags": "TEST,ABC,123",
-        "Synopsis": "Hello World Second Testing Post"
-      },
-      {
-        "Path": "Categories/2021_1_31/Blog/3_HelloWorld.html",
-        "FileName": "3_HelloWorld.html",
-        "Date": "2021_1_31",
-        "Title": "Hello World",
-        "Tags": "TEST,ABC,123",
-        "Synopsis": "Hello World Third Post \n content\n test"
-      }
-    ],
-    "Language": [
-      {
-        "Path": "Categories/2021_1_31/Language/1_HelloWorld.html",
-        "FileName": "1_HelloWorld.html",
-        "Date": "2021_1_31",
+        "Date": "Investment",
         "Title": "Hello World",
         "Tags": "TEST,ABC,123",
         "Synopsis": "Hello World First Post"
       }
-    ],
-    "Linux": [],
-    "Readings": []
+    ]
+  },
+  "Language": {
+    "2021_2_17": [
+      {
+        "Path": "Categories/Language/2021_2_17/1_HelloWorld.html",
+        "FileName": "1_HelloWorld.html",
+        "Date": "Language",
+        "Title": "Hello World",
+        "Tags": "TEST,ABC,123",
+        "Synopsis": "Hello World First Post"
+      }
+    ]
+  },
+  "Linux": {
+    "2021_1_31": [
+      {
+        "Path": "Categories/Linux/2021_1_31/1_HelloWorld.html",
+        "FileName": "1_HelloWorld.html",
+        "Date": "Linux",
+        "Title": "Hello World",
+        "Tags": "TEST,ABC,123",
+        "Synopsis": "Hello World First Post"
+      }
+    ]
+  },
+  "Readings": {
+    "2021_1_31": [
+      {
+        "Path": "Categories/Readings/2021_1_31/1_HelloWorld.html",
+        "FileName": "1_HelloWorld.html",
+        "Date": "Readings",
+        "Title": "Hello World",
+        "Tags": "TEST,ABC,123",
+        "Synopsis": "Hello World First Post"
+      }
+    ]
   }
 }
