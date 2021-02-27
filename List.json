@@ -12,14 +12,14 @@
     ]
   },
   "Investment": {
-    "2021_1_31": [
+    "2021_02_28": [
       {
-        "Path": "Categories/Investment/2021_1_31/1_HelloWorld.html",
-        "FileName": "1_HelloWorld.html",
+        "Path": "Categories/Investment/2021_02_28/1_RotationOfFunds.html",
+        "FileName": "1_RotationOfFunds.html",
         "Date": "Investment",
-        "Title": "Hello World",
-        "Tags": "TEST,ABC,123",
-        "Synopsis": "Hello World First Post"
+        "Title": "Notes on the rotation of funds 2021.",
+        "Tags": "Stocks, Market Movement, 2021",
+        "Synopsis": "A compilation of sources from sites like Reddit regarding the changes that the market has just experienced during Feb 2021"
       }
     ]
   },
