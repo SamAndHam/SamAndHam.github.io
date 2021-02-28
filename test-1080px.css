@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
 
   grid-area: header;
@@ -12,6 +12,7 @@
   overflow: hidden;
   font-size: clamp(0.8em,1em);
   white-space: nowrap;
+  margin-right: 1.5%;
 }
 
 #heading {
@@ -35,7 +36,7 @@ div[id*="headerDate_"]  {
   margin-left:0.5rem;
   border-radius: 5px;
 
-  display: list-item;
+  display: none;
   list-style-type: disc;
   list-style-position: inside;
 }
@@ -47,7 +48,7 @@ div[id*="headerDate_"]:hover  {
 
 
 .sidebar {
-  display: inline-block;
+  display: none;
   grid-area: sidebar;
   background-color: white;
 
@@ -118,12 +119,11 @@ div[id*="headerDate_"]:hover  {
 
   display: grid;
   grid-gap: 0.3%;
-  grid-template-columns: 10% 30% 30% 30%;
+  grid-template-columns: 33% 33% 33%;
   grid-template-areas:
-    "header content content content"
-    "header content content content"
-    "sidebar content content content"
-    "sidebar content content content"
+    "header  header  header"
+    "content content content"
+    "content content content"
 }
 
 body {
