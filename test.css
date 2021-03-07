@@ -145,6 +145,8 @@ body {
 
 .contentDiv > div   {
   margin-left: 1%;
+  margin-right: 3%;
+  text-align: justify;
 }
 
 .contentTitle {
