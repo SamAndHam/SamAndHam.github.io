@@ -143,7 +143,7 @@ body {
 
 }
 
-.contentDiv > div ,p  {
+.contentDiv > div   {
   margin-left: 1%;
 }
 
@@ -159,9 +159,12 @@ body {
   font-size: 60%;
   padding-left: 3em;
 }
+
+
 .contentSynopsis {
 
   border-left: 1px solid gray;  
+  margin-bottom: 0.5%;
   font-size: 100%;
   white-space: pre-line;
 }

@@ -74,7 +74,7 @@ function parseElementContent(num, SelectedState, SelectedDate) {
   var date        = document.createElement("DIV");
   date.className = "contentDate";
 
-  var synopsis   = document.createElement("P");
+  var synopsis   = document.createElement("DIV");
   synopsis.className = "contentSynopsis";
 
   title.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Title;
