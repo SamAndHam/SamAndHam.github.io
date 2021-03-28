@@ -1,7 +1,5 @@
 .header {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: inline-table;
 
   grid-area: header;
   background-color:white;
@@ -16,19 +14,21 @@
 }
 
 #heading {
-  width: auto;
-  height: auto;
+  float: left;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 5px;
 
   #text-align: center;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
 }
 
 #heading:hover {
   width: auto;
   height: auto;
-  background-color: #f0f0f0;
+  background-color: #f0f1f1;
   transition: transform 175ms;
 }
 
