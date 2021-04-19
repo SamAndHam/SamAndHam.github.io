@@ -7,13 +7,31 @@ var historyList = [];  //To maintain history
 
 var JSON_STATC_DATA;   // List of files JSON 
 var JSON_HEADER_KEYS;
-var JSON_DATE_KEYS = new Set();
+var JSON_DATE_KEYS = new Set(); //Set of dates, Biggest to smallest
+
 
 function initList() {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       JSON_STATC_DATA = JSON.parse(xhr.responseText);
+      var keys = Object.keys(JSON_STATC_DATA);
+      //retrieve all date keys, sort and store
+      var tmpDate = []
+      for ( var i = 0 ; i < keys.length; i++) {
+        var dates = Object.keys(JSON_STATC_DATA[keys[i]]);
+        for (var z =0 ; z < dates.length; z ++) {
+          tmpDate.push(new Date(dates[z]));
+        }
+      } 
+      tmpDate.sort(function(a,b) {
+        return b-a;
+      });
+
+      for (var i = 0; i < tmpDate.length; i++) {
+        var tmpStr = tmpDate[i].toISOString().substring(0,10);
+        JSON_DATE_KEYS.add(tmpStr);
+      }
       loadHeader();
       //loadDateSidebar();
       loadSubPage();
