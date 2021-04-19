@@ -160,15 +160,13 @@ function loadSubPage() {
   document.getElementById("content").innerHTML = "";
 
   if (Page_State == "All" && Page_SelectedDate == "All") {
-    for (var i = 0; i < JSON_HEADER_KEYS.length; i++) {
-      var currentPageState = JSON_HEADER_KEYS[i];
-      var tmpDateKeys = Object.keys(JSON_STATC_DATA[currentPageState]);
-      tmpDateKeys.forEach( function(value) {
-      for ( var z = 0; z <JSON_STATC_DATA[currentPageState][value].length; z++) {
-          if (JSON_STATC_DATA[currentPageState][value] )
-            parseElementContent( z,  currentPageState,value);
+    for (const date of JSON_DATE_KEYS) {
+      for (const header of JSON_HEADER_KEYS) {
+        if (!JSON_STATC_DATA[header][date]) continue;
+        for ( var z = 0; z <JSON_STATC_DATA[header][date].length; z++) {
+          parseElementContent( z,  header,date);
         }
-      }) 
+      }
     }
   }
 
