@@ -94,6 +94,7 @@ div[id*="headerDate_"]:hover  {
 
   margin-bottom: 0.1rem;
   margin-right: 1.5%;
+  width: 100%;
 }
 
 .content > div:hover {
