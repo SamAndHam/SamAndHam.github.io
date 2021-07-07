@@ -1,15 +1,15 @@
 .header {
-  display: block;
-  #flex-direction: column;
-  #flex-wrap: wrap;
-  height: 100vh ;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 
   grid-area: header;
   background-color:white;
 
-  border-right: 1px solid black;
+  border: 1px solid black;
+  border-radius: 5px;
 
-  overflow: auto;
+  overflow: hidden;
   font-size: clamp(0.8em,1em);
   white-space: nowrap;
 }
@@ -101,12 +101,19 @@ div[id*="headerDate_"]:hover  {
   background-color: #f0f0f0;
 }
 
+.footer {
+  visibility: hidden;
+
+  background-color: green;
+  grid-area: footer;
+}
+
 
 .container {
   height: 100%;
   overflow: hidden;
   #outline: 0.5px solid gray;
-  #border-radius: 5px;
+  border-radius: 5px;
   #background-color: white;
 
 
@@ -116,8 +123,8 @@ div[id*="headerDate_"]:hover  {
   grid-template-areas:
     "header content content content"
     "header content content content"
-    "header content content content"
-    "header content content content"
+    "sidebar content content content"
+    "sidebar content content content"
 }
 
 body {
