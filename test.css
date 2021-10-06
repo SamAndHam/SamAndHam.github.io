@@ -47,6 +47,17 @@ body {
   border: 1px solid black;
 }
 
+.title {
+  border-bottom: 1px solid black;
+  border-left:   1px solid black;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 65%;
+}
+
 .content {
   margin-left:14%;
   width: 80%;
