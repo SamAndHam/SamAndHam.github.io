@@ -104,8 +104,8 @@ function parseElementContent(num, SelectedState, SelectedDate) {
   tags.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Topic ;
   synopsis.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Synopsis;
 
-  info.appendChild(date);
   info.appendChild(tags);
+  info.appendChild(date);
  
   contentDiv.appendChild(title);
   contentDiv.appendChild(info);
