@@ -89,18 +89,26 @@ function parseElementContent(num, SelectedState, SelectedDate) {
   var title       = document.createElement("DIV");
   title.className ="title";
 
+  var info        = document.createElement("DIV");
+  info.className = "info";
   var date        = document.createElement("DIV");
   date.className = "date";
+  var tags        = document.createElement("DIV");
+  tags.className = "tags";
 
   var synopsis   = document.createElement("DIV");
   synopsis.className = "synopsis";
 
   title.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Title;
-  date.innerHTML = SelectedDate + " | " + JSON_STATC_DATA[SelectedState][SelectedDate][num].Date.replace(/_/g,"/") ;
+  date.innerHTML = SelectedDate ;
+  tags.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Topic ;
   synopsis.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Synopsis;
-  
+
+  info.appendChild(date);
+  info.appendChild(tags);
+ 
   contentDiv.appendChild(title);
-  contentDiv.appendChild(date);
+  contentDiv.appendChild(info);
   contentDiv.appendChild(synopsis);
 
   document.getElementById("content").appendChild(contentDiv); 
