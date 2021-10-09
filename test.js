@@ -46,7 +46,7 @@ function initList() {
 
 function parseElementContent(num, SelectedState, SelectedDate) {
   var contentDiv = document.createElement("DIV");
-  contentDiv.className = "contentDiv";
+  contentDiv.className = "article";
   contentDiv.setAttribute("data", JSON_STATC_DATA[SelectedState][SelectedDate][num].path) ;
   contentDiv.onclick = function() { 
     var xhr = new XMLHttpRequest();
@@ -87,13 +87,13 @@ function parseElementContent(num, SelectedState, SelectedDate) {
   }
 
   var title       = document.createElement("DIV");
-  title.className ="contentTitle";
+  title.className ="title";
 
   var date        = document.createElement("DIV");
-  date.className = "contentDate";
+  date.className = "date";
 
   var synopsis   = document.createElement("DIV");
-  synopsis.className = "contentSynopsis";
+  synopsis.className = "synopsis";
 
   title.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Title;
   date.innerHTML = SelectedDate + " | " + JSON_STATC_DATA[SelectedState][SelectedDate][num].Date.replace(/_/g,"/") ;
@@ -109,51 +109,7 @@ function parseElementContent(num, SelectedState, SelectedDate) {
 //Header Div -> Dates
 function loadHeader() { 
   JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA);
-  
-  var headerContainer = document.createElement("DIV");
 
-
-  var all = document.createElement("DIV");
-  all.innerHTML = "All"
-  all.id = "heading"
-  all.onclick = function() {
-    Page_State = this.innerHTML;
-    Page_SelectedDate = "All";
-    loadSubPage();
-  }
-  headerContainer.appendChild(all);  
-
-  for (var i = 0; i < JSON_HEADER_KEYS.length; i++) {
-    var header = document.createElement("DIV");
-    var key = JSON_HEADER_KEYS[i]
-    header.innerHTML = key;
-    header.id = "heading"
-
-    header.onclick = function () {
-      Page_State = this.innerHTML.split("<")[0];
-      Page_SelectedDate = "All";
-      loadSubPage();
-    }
-
-    headerContainer.appendChild(header);
-
-    var tmpdateKeys = Object.keys(JSON_STATC_DATA[  key]);
-    for ( var z = 0; z <  tmpdateKeys.length; z++) {
-      var headerDate = document.createElement("DIV");
-      headerDate.innerHTML = tmpdateKeys[z];
-      headerDate.id        = "headerDate_" + key;
-      headerDate.setAttribute("Topic", key);
-      headerDate.onclick = function() {
-        Page_State = this.getAttribute("Topic");
-        Page_SelectedDate = this.innerHTML;
-        loadSubPage();
-      } 
-      headerContainer.appendChild(headerDate);
-    }
-
-  }
-
-    document.getElementById("header").appendChild(headerContainer);
 }
 
 function loadSubPage() {
