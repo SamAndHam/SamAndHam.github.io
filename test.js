@@ -61,9 +61,16 @@ function parseElementContent(num, SelectedState, SelectedDate) {
         contentTitle.className = "contentTitle";
         contentTitle.innerHTML = container.getElementById("title").innerHTML;
 
-        var contentDate        = document.createElement("DIV");
-        contentDate.className  = "contentDate";
-        contentDate.innerHTML  = SelectedDate + " | " +  SelectedState;
+        var info        = document.createElement("DIV");
+        info.className = "info";
+        var date        = document.createElement("DIV");
+        date.className = "date";
+        date.innerHTML = SelectedDate;
+        var tags        = document.createElement("DIV");
+        tags.className = "tags";
+        tags.innerHTML = SelectedState;
+        info.appendChild(tags);
+        info.appendChild(date);
 
         var contentData        =  document.createElement("DIV");
         contentData.className  = "contentData";
@@ -72,7 +79,7 @@ function parseElementContent(num, SelectedState, SelectedDate) {
         var contentDiv          = document.createElement("DIV");
         contentDiv.className    = "contentDiv";
         contentDiv.appendChild(contentTitle);
-        contentDiv.appendChild(contentDate);
+        contentDiv.appendChild(info);
         contentDiv.appendChild(contentData); 
         document.getElementById("content").innerHTML = "";
         document.getElementById("content").appendChild(contentDiv);
