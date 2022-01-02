@@ -27,18 +27,19 @@ parse_file() {
   TITLE=$(cat $1 | hq \#title text)
   SYNOPSIS=$(cat $1 | hq \#synopsis text)
   TAGS=$(cat $1 | hq \#tags text)
-
-  ISLAST=$2
+  DATE=$2
+  ISLAST=$3
 
   echo "{"
   format_entry "Path" "$1"
   format_entry "FileName" "$FILE_NAME"
   format_entry "Topic" "$TOPIC"
   format_entry "Title" "$TITLE"
+  format_entry "Date" "$DATE"
   format_entry "Tags" "$TAGS"
   format_entry "Synopsis" "$SYNOPSIS" 1
 
-  if [[ $2 == 0 ]]; then 
+  if [[ $ISLAST == 0 ]]; then 
     echo "}" 
   else
     echo "},"
@@ -49,7 +50,7 @@ iterate_files() {
   HTMLPAGES=()
   DIR=$1
   CATEGORY=$(echo $DIR | cut --delimiter='/' --fields=1 ) 
-  DATE=$(echo $DIR | cut --delimiter='/' --fields=2 )
+  DATE=$(echo $DIR | cut --delimiter='/' --fields=3 )
   #echo "$CATEGORY $DATE" 
   COUNT=0
   NOF=$(ls -1 $DIR/ | wc -l)
@@ -59,7 +60,7 @@ iterate_files() {
       PAGE_NAME=$(echo $file | cut --delimiter='/' --fields=3 )
       ISLAST=$((NOF-COUNT))
       if [[ $PAGE_NAME != "*" ]]; then
-        parse_file  $file $ISLAST
+        parse_file  $file $DATE $ISLAST
       fi
     done
   fi
