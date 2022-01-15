@@ -65,11 +65,13 @@ function initList() {
       });
      
       //DEBUG 
+      /*
       for ( var x in JSON_PAGE_METADATA ) {
         console.log(JSON_PAGE_METADATA[x]);
       }
 
       TOPIC_SET.forEach((value) => {console.log(value)});
+      */
       //DEBUG
 
       //========
@@ -103,10 +105,38 @@ function initList() {
 }
 
 
-function parseElementContent(num, SelectedState, SelectedDate) {
+//Header Div -> Dates
+function loadHeader() { 
+  JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA);
+
+  document.getElementById("topics").innerHTML = "";
+ 
+  TOPIC_SET.forEach( value => {
+    var topicDiv = document.createElement("DIV");
+    topicDiv.className = "button";
+    topicDiv.innerHTML = value;
+    topicDiv.onclick = function() { 
+      TOPIC_SELECTED = this.innerHTML; 
+      //console.log(this.innerHTML);
+      
+      //reload page here
+      loadSubPage();
+    };
+    document.getElementById("topics").appendChild(topicDiv);
+  }); 
+
+  //Home button
+  document.getElementById("homeButton").onclick = function() {
+    TOPIC_SELECTED = "";
+    loadSubPage();
+  }
+}
+
+function parseElementContent( topic ) 
+{
   var contentDiv = document.createElement("DIV");
   contentDiv.className = "article";
-  contentDiv.setAttribute("data", JSON_STATC_DATA[SelectedState][SelectedDate][num].path) ;
+  contentDiv.setAttribute("data", topic.Path) ;
   contentDiv.onclick = function() { 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -124,10 +154,10 @@ function parseElementContent(num, SelectedState, SelectedDate) {
         info.className = "info";
         var date        = document.createElement("DIV");
         date.className = "date";
-        date.innerHTML = SelectedDate;
+        date.innerHTML =  topic.Date;
         var tags        = document.createElement("DIV");
         tags.className = "tags";
-        tags.innerHTML = SelectedState;
+        tags.innerHTML =  topic.Topic;
         info.appendChild(tags);
         info.appendChild(date);
 
@@ -143,12 +173,12 @@ function parseElementContent(num, SelectedState, SelectedDate) {
         document.getElementById("content").innerHTML = "";
         document.getElementById("content").appendChild(contentDiv);
         
-        history.pushState( '', JSON_STATC_DATA[SelectedState][SelectedDate][num].Path,JSON_STATC_DATA[SelectedState][SelectedDate][num].Path);
+        history.pushState( '', topic.Path, topic.Path);
         historyList.push(window.location.href);
 
       }
     }
-    xhr.open("GET", JSON_STATC_DATA[SelectedState][SelectedDate][num].Path , true);
+    xhr.open("GET", topic.Path , true);
     xhr.send();
   }
 
@@ -165,10 +195,10 @@ function parseElementContent(num, SelectedState, SelectedDate) {
   var synopsis   = document.createElement("DIV");
   synopsis.className = "synopsis";
 
-  title.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Title;
-  date.innerHTML = SelectedDate ;
-  tags.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Topic ;
-  synopsis.innerHTML = JSON_STATC_DATA[SelectedState][SelectedDate][num].Synopsis;
+  title.innerHTML = topic.Title;
+  date.innerHTML =  topic.Date ;
+  tags.innerHTML =  topic.Topic ;
+  synopsis.innerHTML = topic.Synopsis;
 
   info.appendChild(tags);
   info.appendChild(date);
@@ -178,64 +208,26 @@ function parseElementContent(num, SelectedState, SelectedDate) {
   contentDiv.appendChild(synopsis);
 
   document.getElementById("content").appendChild(contentDiv); 
-}
 
-//Header Div -> Dates
-function loadHeader() { 
-  JSON_HEADER_KEYS = Object.keys(JSON_STATC_DATA);
 
-  document.getElementById("topics").innerHTML = "";
- 
-  TOPIC_SET.forEach( value => {
-    
-    var topicDiv = document.createElement("DIV");
-    topicDiv.className = "button";
-    topicDiv.innerHTML = value;
-    topicDiv.onclick = function() { 
-      TOPIC_SELECTED = this.innerHTML; 
-      //console.log(this.innerHTML);
-      
-      //reload page here
-    };
-    document.getElementById("topics").appendChild(topicDiv);
-    
-  }); 
+} 
 
-}
 
 function loadSubPage() {
   document.getElementById("content").innerHTML = "";
 
-  if (Page_State == "All" && Page_SelectedDate == "All") {
-    for (const date of JSON_DATE_KEYS) {
-      for (const header of JSON_HEADER_KEYS) {
-        if (!JSON_STATC_DATA[header][date]) continue;
-        for ( var z = 0; z <JSON_STATC_DATA[header][date].length; z++) {
-          parseElementContent( z,  header,date);
-        }
-      }
-    }
+  if (TOPIC_SELECTED == "" ) {
+    JSON_PAGE_METADATA.forEach( value => {
+      console.log(value);
+      parseElementContent(value);
+    });
+  } else {
+    JSON_PAGE_METADATA.forEach( value => {
+      if ( value.Topic == TOPIC_SELECTED )  
+        parseElementContent(value);
+    });
   }
 
-  if (Page_SelectedDate  == "All"  && Page_State != "All") {
-    var currentPageState = Page_State;
-    
-    var tmpDateKeys = Object.keys(JSON_STATC_DATA[currentPageState]);
-    tmpDateKeys.forEach( function(value) {
-    for ( var z = 0; z <JSON_STATC_DATA[currentPageState][value].length; z++) {
-        if (JSON_STATC_DATA[currentPageState][value] )
-          parseElementContent( z,  currentPageState,value);
-      }
-    })
-  }
-
-  if (Page_State != "All" && Page_SelectedDate != "All") {
-    var articles = Object.keys(JSON_STATC_DATA[Page_State][Page_SelectedDate]); 
-    for ( var z = 0; z <articles.length; z++) {
-        if (JSON_STATC_DATA[Page_State][Page_SelectedDate] )
-          parseElementContent( z,   Page_State, Page_SelectedDate);
-      }
-  }
   history.pushState('Home','Home',Base_URL );
 }
 
