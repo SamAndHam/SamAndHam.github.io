@@ -1,6 +1,3 @@
-var Page_State = "All"  // All, Blog, Programming, Language, Linux , Readings, Links
-var Previous_State = ""
-var Page_SelectedDate = "All";
 var Base_URL = window.location.href;
 
 var historyList = [];  //To maintain history
@@ -14,25 +11,6 @@ var TOPIC_SELECTED = "";      // Topic filter. if blank no filter.
 var JSON_HEADER_KEYS;
 var JSON_DATE_KEYS = new Set(); //Set of dates, Biggest to smallest
 
-// create struct to store topics.
-// topics -> date
-//        -> topic
-//        -> title
-//        -> tags
-//        -> title
-//        -> synopsis
-//        -> Link to actual data
-//
-function populateTopics(node, articleDate) 
-{
-  this.articleDate  = articleDate;
-  this.Topic        = node.Topic;
-  this.Title        = node.Title;
-  this.Tags         = node.Tags;
-  this.Synopsis     = node.Synopsis;
-  this.Path         = node.Path;
-}
-//TODO insert DATE into json itself. instead of another nest
  
 function initList() {
   var xhr = new XMLHttpRequest();
@@ -129,15 +107,25 @@ function loadHeader() {
   document.getElementById("homeButton").onclick = function() {
     TOPIC_SELECTED = "";
     loadSubPage();
-  }
+  };
+
+  document.getElementById("aboutMeButton").onclick = function() {
+    //open about me.
+    const Topic = {
+      Path : "aboutMe.html" ,
+      FileName:"aboutMe.html",
+      Topic: "",
+      Date : "",
+      Tags : "",
+      Synopsis: ""
+    };
+    callPageAndFill(Topic);
+  };
+
 }
 
-function parseElementContent( topic ) 
+function callPageAndFill( topic) 
 {
-  var contentDiv = document.createElement("DIV");
-  contentDiv.className = "article";
-  contentDiv.setAttribute("data", topic.Path) ;
-  contentDiv.onclick = function() { 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -180,6 +168,17 @@ function parseElementContent( topic )
     }
     xhr.open("GET", topic.Path , true);
     xhr.send();
+
+
+}
+
+function parseElementContent( topic ) 
+{
+  var contentDiv = document.createElement("DIV");
+  contentDiv.className = "article";
+  contentDiv.setAttribute("data", topic.Path) ;
+  contentDiv.onclick = function() { 
+    callPageAndFill(topic);
   }
 
   var title       = document.createElement("DIV");
@@ -218,7 +217,6 @@ function loadSubPage() {
 
   if (TOPIC_SELECTED == "" ) {
     JSON_PAGE_METADATA.forEach( value => {
-      console.log(value);
       parseElementContent(value);
     });
   } else {
