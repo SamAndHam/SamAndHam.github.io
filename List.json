@@ -1,4 +1,28 @@
 {
+  "AskReddit": {
+    "2021-05-05": [
+      {
+        "Path": "Categories/AskReddit/2021-05-05/1_Quotes_Changed_Life.html",
+        "FileName": "1_Quotes_Changed_Life.html",
+        "Topic": "AskReddit",
+        "Title": "What's a quote that permanently changed the way you look at things",
+        "Date": "2021-05-05",
+        "Tags": "Emotion, Cognitive, Behaviour, Bookmark",
+        "Synopsis": "Quotes saved from an AskReddit post about quotes which have changed people's percepective of things in life"
+      }
+    ],
+    "2021-06-05": [
+      {
+        "Path": "Categories/AskReddit/2021-06-05/1_AskReddit_WhatIsYourBestAdvice.html",
+        "FileName": "1_AskReddit_WhatIsYourBestAdvice.html",
+        "Topic": "AskReddit",
+        "Title": "AskReddit: What is your best advice",
+        "Date": "2021-06-05",
+        "Tags": "Life, Emotion, Cognitive, Behaviour, Bookmark",
+        "Synopsis": "Quotes saved from a Ask Reddit post"
+      }
+    ]
+  },
   "Blog": {
     "2021-03-21": [
       {
@@ -9,28 +33,6 @@
         "Date": "2021-03-21",
         "Tags": "Emotion, Cognitive, Behaviour, Bookmark",
         "Synopsis": "Piotr Migdał's post on ways to categorize our reactions to daily life in three distinct categories; Fight, Flight or Freeze"
-      }
-    ],
-    "2021-05-05": [
-      {
-        "Path": "Categories/Blog/2021-05-05/1_Quotes_Changed_Life.html",
-        "FileName": "1_Quotes_Changed_Life.html",
-        "Topic": "Blog",
-        "Title": "What's a quote that permanently changed the way you look at things",
-        "Date": "2021-05-05",
-        "Tags": "Emotion, Cognitive, Behaviour, Bookmark",
-        "Synopsis": "Quotes saved from an AskReddit post about quotes which have changed people's percepective of things in life"
-      }
-    ],
-    "2021-06-05": [
-      {
-        "Path": "Categories/Blog/2021-06-05/1_AskReddit_WhatIsYourBestAdvice.html",
-        "FileName": "1_AskReddit_WhatIsYourBestAdvice.html",
-        "Topic": "Blog",
-        "Title": "AskReddit: What is your best advice",
-        "Date": "2021-06-05",
-        "Tags": "Life, Emotion, Cognitive, Behaviour, Bookmark",
-        "Synopsis": "Quotes saved from a Ask Reddit post"
       }
     ]
   },
