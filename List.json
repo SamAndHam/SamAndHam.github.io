@@ -82,6 +82,17 @@
         "Tags": "Japanese,Language",
         "Synopsis": "Vocabulary about different utensils used in the kitchen"
       }
+    ],
+    "2022-04-02": [
+      {
+        "Path": "Categories/Language/2022-04-02/1_CookingPlants.html",
+        "FileName": "1_CookingPlants.html",
+        "Topic": "Language",
+        "Title": "Cooking: Vegetables often used in cooking",
+        "Date": "2022-04-02",
+        "Tags": "Language",
+        "Synopsis": "Vocabulary about different plants and vegetables used in cooking"
+      }
     ]
   },
   "Linux": {
