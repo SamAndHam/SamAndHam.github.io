@@ -130,6 +130,17 @@
         "Tags": "TEST,ABC,123",
         "Synopsis": "Hello World First Post"
       }
+    ],
+    "2022-06-12": [
+      {
+        "Path": "Categories/Readings/2022-06-12/1_CuratedPosts.html",
+        "FileName": "1_CuratedPosts.html",
+        "Topic": "Readings",
+        "Title": "Curated posts from the various corners of the internet.",
+        "Date": "2022-06-12",
+        "Tags": "Emotion, Cognitive, Behaviour, Bookmark",
+        "Synopsis": "Sourced from various parts of the internet"
+      }
     ]
   }
 }
